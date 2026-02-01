@@ -21,7 +21,6 @@ class Website:
         self.successful_checks = 0
         self.status_history = []  # List of status change events
         self.response_times = []  # Track last 100 response times
-        self.ssl_expiry_date = None
         self.created_at = datetime.now()
 
     def calculate_uptime(self):
@@ -58,7 +57,7 @@ class Website:
         """Calculate average response time from recent checks"""
         if not self.response_times:
             return 0
-        return sum(self.response_times) // len(self.response_times)
+        return int(sum(self.response_times) / len(self.response_times))
 
     def to_dict(self):
         return {
@@ -71,7 +70,6 @@ class Website:
             "total_checks": self.total_checks,
             "avg_response_time": self.get_average_response_time(),
             "status_history": self.status_history[-10:],  # Last 10 events
-            "ssl_expiry_date": self.ssl_expiry_date.isoformat() if self.ssl_expiry_date else None,
             "created_at": self.created_at.isoformat()
         }
 
@@ -119,15 +117,6 @@ class StatusManager:
                     website.status = f"HTTP {response.status_code}"
                     website.is_up = False
                     website.add_check_result(False, website.response_time)
-                
-                # Check SSL certificate expiry if HTTPS
-                if website.url.startswith("https://"):
-                    try:
-                        # Get SSL info from response
-                        # Note: httpx doesn't expose SSL cert directly, would need separate SSL check
-                        pass
-                    except:
-                        pass
                     
         except httpx.RequestError as e:
             website.status = "DOWN"

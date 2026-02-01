@@ -9,12 +9,13 @@ import os
 import json
 import csv
 import io
-import sys
 
-# Add parent directory to path for imports
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from monitor import manager
+# Use relative import
+try:
+    from .monitor import manager
+except ImportError:
+    # Fallback for direct execution
+    from monitor import manager
 
 app = FastAPI()
 

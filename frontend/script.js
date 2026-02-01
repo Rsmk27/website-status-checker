@@ -113,11 +113,11 @@ async function updateStatistics() {
         const response = await fetch('/api/statistics');
         const stats = await response.json();
         
-        document.getElementById('totalWebsites').textContent = stats.total_websites;
-        document.getElementById('websitesUp').textContent = stats.websites_up;
-        document.getElementById('websitesDown').textContent = stats.websites_down;
-        document.getElementById('avgUptime').textContent = stats.average_uptime.toFixed(1) + '%';
-        document.getElementById('avgResponseTime').textContent = Math.round(stats.average_response_time) + 'ms';
+        document.getElementById('totalWebsites').textContent = stats.total_websites || 0;
+        document.getElementById('websitesUp').textContent = stats.websites_up || 0;
+        document.getElementById('websitesDown').textContent = stats.websites_down || 0;
+        document.getElementById('avgUptime').textContent = (stats.average_uptime || 0).toFixed(1) + '%';
+        document.getElementById('avgResponseTime').textContent = Math.round(stats.average_response_time || 0) + 'ms';
     } catch (e) {
         console.error('Error fetching statistics:', e);
     }
@@ -188,8 +188,8 @@ function renderWebsites(websites) {
 
         return `
             <div class="website-item">
-                <div class="website-url" title="${site.url}">${site.url}</div>
-                <div><span class="status-badge ${statusClass}">${statusText}</span></div>
+                <div class="website-url" title="${escapeHtml(site.url)}">${escapeHtml(site.url)}</div>
+                <div><span class="status-badge ${statusClass}">${escapeHtml(statusText)}</span></div>
                 <div class="response-time">
                     ${site.response_time > 0 ? site.response_time + ' ms' : '-'}
                     ${site.avg_response_time > 0 ? '<br><small>(avg: ' + site.avg_response_time + ' ms)</small>' : ''}
@@ -199,16 +199,38 @@ function renderWebsites(websites) {
                 </div>
                 <div class="last-checked">${lastChecked}</div>
                 <div class="action-buttons">
-                    <button class="history-btn" onclick='showHistory(${JSON.stringify(site.url)}, ${JSON.stringify(site.status_history)})' title="View History">
+                    <button class="history-btn" data-url="${escapeHtml(site.url)}" data-history='${escapeHtml(JSON.stringify(site.status_history))}' title="View History">
                         📊
                     </button>
-                    <button class="delete-btn" onclick="removeWebsite('${site.url}')" title="Remove">
+                    <button class="delete-btn" data-url="${escapeHtml(site.url)}" title="Remove">
                         🗑️
                     </button>
                 </div>
             </div>
         `;
     }).join('');
+    
+    // Add event listeners to buttons
+    document.querySelectorAll('.history-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const url = e.currentTarget.dataset.url;
+            const history = JSON.parse(e.currentTarget.dataset.history);
+            showHistory(url, history);
+        });
+    });
+    
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const url = e.currentTarget.dataset.url;
+            removeWebsite(url);
+        });
+    });
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 function isValidUrl(string) {
