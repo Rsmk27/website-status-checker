@@ -16,9 +16,44 @@
             <p>Real-time uptime monitoring</p>
         </header>
 
+        <!-- Statistics Dashboard -->
+        <section class="statistics-dashboard">
+            <div class="stat-card">
+                <div class="stat-value" id="totalWebsites">0</div>
+                <div class="stat-label">Total Websites</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value stat-success" id="websitesUp">0</div>
+                <div class="stat-label">Websites Up</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value stat-danger" id="websitesDown">0</div>
+                <div class="stat-label">Websites Down</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avgUptime">0%</div>
+                <div class="stat-label">Avg Uptime</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avgResponseTime">0ms</div>
+                <div class="stat-label">Avg Response Time</div>
+            </div>
+        </section>
+
         <section class="add-website-section">
             <input type="url" id="urlInput" placeholder="Enter website URL (e.g., https://google.com)" required>
             <button id="addBtn">Add Website</button>
+        </section>
+
+        <!-- Toolbar with search and export -->
+        <section class="toolbar">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search websites..." />
+            </div>
+            <div class="toolbar-actions">
+                <button id="exportJsonBtn" class="secondary-btn">📥 Export JSON</button>
+                <button id="exportCsvBtn" class="secondary-btn">📥 Export CSV</button>
+            </div>
         </section>
 
         <section class="dashboard">
@@ -26,6 +61,7 @@
                 <span>URL</span>
                 <span>Status</span>
                 <span>Response Time</span>
+                <span>Uptime %</span>
                 <span>Last Checked</span>
                 <span>Action</span>
             </div>
@@ -34,6 +70,19 @@
                 <div class="empty-state">No websites monitored yet. Add one above!</div>
             </div>
         </section>
+
+        <!-- History Modal -->
+        <div id="historyModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Status History</h2>
+                    <button id="historyCloseBtn" class="close-btn">✕</button>
+                </div>
+                <div id="historyContent" class="modal-body">
+                    <!-- History items will be populated here -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="/static/script.js"></script>
