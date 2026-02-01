@@ -1,0 +1,211 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #3b82f6;
+    --success-color: #22c55e;
+    --error-color: #ef4444;
+    --warning-color: #eab308;
+    --border-color: #334155;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--accent-color), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    color: var(--text-secondary);
+}
+
+.add-website-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+input[type="url"] {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="url"]:focus {
+    border-color: var(--accent-color);
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2563eb;
+}
+
+.dashboard {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.grid-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr 0.5fr;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.website-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.website-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr 0.5fr;
+    padding: 1rem 1.5rem;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.1s;
+}
+
+.website-item:last-child {
+    border-bottom: none;
+}
+
+.website-item:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.website-url {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: fit-content;
+}
+
+.status-up {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: var(--success-color);
+}
+
+.status-down {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--error-color);
+}
+
+.status-check {
+    background-color: rgba(234, 179, 8, 0.2);
+    color: var(--warning-color);
+}
+
+.response-time {
+    font-family: monospace;
+    color: var(--text-secondary);
+}
+
+.last-checked {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.delete-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 0.4rem;
+    border-radius: 6px;
+}
+
+.delete-btn:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--error-color);
+}
+
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+/* Animations */
+@keyframes flash-green {
+    0% { background-color: rgba(34, 197, 94, 0.4); }
+    100% { background-color: transparent; }
+}
+
+@keyframes flash-red {
+    0% { background-color: rgba(239, 68, 68, 0.4); }
+    100% { background-color: transparent; }
+}
+
+.updated-up {
+    animation: flash-green 1s ease-out;
+}
+
+.updated-down {
+    animation: flash-red 1s ease-out;
+}

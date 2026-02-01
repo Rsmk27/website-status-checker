@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Website Status Checker</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Website Status Checker</h1>
+            <p>Real-time uptime monitoring</p>
+        </header>
+
+        <section class="add-website-section">
+            <input type="url" id="urlInput" placeholder="Enter website URL (e.g., https://google.com)" required>
+            <button id="addBtn">Add Website</button>
+        </section>
+
+        <section class="dashboard">
+            <div class="grid-header">
+                <span>URL</span>
+                <span>Status</span>
+                <span>Response Time</span>
+                <span>Last Checked</span>
+                <span>Action</span>
+            </div>
+            <div id="websiteList" class="website-list">
+                <!-- Website items will be added here dynamically -->
+                <div class="empty-state">No websites monitored yet. Add one above!</div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

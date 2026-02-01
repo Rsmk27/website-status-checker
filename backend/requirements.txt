@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+httpx
+websockets
+jinja2
+python-multipart
+# python-multipart is often needed for form data processing in FastAPI, though we might send JSON. Good to have.
