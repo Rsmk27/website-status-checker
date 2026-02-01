@@ -48,6 +48,13 @@ exportCsvBtn.addEventListener('click', () => {
     window.location.href = '/api/export/csv';
 });
 
+// History modal close button
+const historyCloseBtn = document.getElementById('historyCloseBtn');
+historyCloseBtn.addEventListener('click', () => {
+    document.getElementById('historyModal').style.display = 'none';
+});
+
+
 async function addWebsite() {
     const url = urlInput.value.trim();
     if (!url) return;
