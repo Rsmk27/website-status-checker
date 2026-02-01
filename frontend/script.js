@@ -52,7 +52,10 @@ exportCsvBtn.addEventListener('click', () => {
 const historyCloseBtn = document.getElementById('historyCloseBtn');
 if (historyCloseBtn) {
     historyCloseBtn.addEventListener('click', () => {
-        document.getElementById('historyModal').style.display = 'none';
+        const modal = document.getElementById('historyModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
     });
 }
 
