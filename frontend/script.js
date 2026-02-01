@@ -50,12 +50,10 @@ exportCsvBtn.addEventListener('click', () => {
 
 // History modal close button
 const historyCloseBtn = document.getElementById('historyCloseBtn');
-if (historyCloseBtn) {
+const historyModal = document.getElementById('historyModal');
+if (historyCloseBtn && historyModal) {
     historyCloseBtn.addEventListener('click', () => {
-        const modal = document.getElementById('historyModal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
+        historyModal.style.display = 'none';
     });
 }
 
